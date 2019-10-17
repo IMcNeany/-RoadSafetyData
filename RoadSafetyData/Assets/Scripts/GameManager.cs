@@ -17,18 +17,23 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private List<float>         time_multipliers;
 
-    private int                 num_accidents_in_year = 122636;
-    private int                 num_people_uk = 66040000;
+    private DataCruncher        data_cruncher;
+    private JSONReader          json_reader;
     public float                percentage_accident;
 
     void Start()
     {
+        json_reader = GetComponentInChildren<JSONReader>();
+        data_cruncher = GetComponentInChildren<DataCruncher>();
+
+        json_reader.LoadJSON();
+        data_cruncher.CrunchNumbers();
         UpdatePercentageAccident();
     }
 
     public void UpdatePercentageAccident()
     {
-        percentage_accident = (float)num_accidents_in_year / (float)num_people_uk * 100.0f;
+        //percentage_accident = (float)num_accidents_in_year / (float)num_people_uk * 100.0f;
     }
 
     //default chance of accident without pedestrian data

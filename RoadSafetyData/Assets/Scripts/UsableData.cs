@@ -10,14 +10,16 @@ public enum accident_locations
     exit,
     nearby,
     carriageway,
-    pavement
+    pavement,
+    NUMSTATS
 }
 
 public enum accident_severity
 {
     slight,
     serious,
-    fatal
+    fatal,
+    NUMSTATS
 }
 
 public enum accident_weather
@@ -26,7 +28,8 @@ public enum accident_weather
     normal,
     rain,
     snow,
-    fog
+    fog,
+    NUMSTATS
 }
 
 public enum accident_weekday
@@ -37,7 +40,8 @@ public enum accident_weekday
     thursday,
     friday,
     saturday,
-    sunday
+    sunday,
+    NUMSTATS
 }
 
 public enum accident_lighting
@@ -45,7 +49,8 @@ public enum accident_lighting
     none,
     daylight,
     streetlamp,
-    darkness
+    darkness,
+    NUMSTATS
 }
 
 

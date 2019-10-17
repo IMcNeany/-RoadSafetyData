@@ -68,16 +68,9 @@ public class JSONReader : MonoBehaviour
     public Rootobject loadedData;
     public DataCruncher cruncher;
 
-    // Start is called before the first frame update
-    void Start()
+    public void LoadJSON()
     {
         loadedData = new Rootobject();
-        LoadJSON();
-        JsonDataToUsableData();
-    }
-
-    void LoadJSON()
-    {
         string filePath = Path.Combine(Application.streamingAssetsPath, "SafetyDataJSON.Json");
 
         if (File.Exists(filePath))
@@ -91,6 +84,7 @@ public class JSONReader : MonoBehaviour
         {
             Debug.Log("Error to open JSON");
         }
+        JsonDataToUsableData();
     }
 
 
