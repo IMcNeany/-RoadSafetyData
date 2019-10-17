@@ -65,14 +65,15 @@ public class Rootobject
 
 public class JSONReader : MonoBehaviour
 {
-    
     public Rootobject loadedData;
+    public DataCruncher cruncher;
 
     // Start is called before the first frame update
     void Start()
     {
         loadedData = new Rootobject();
         LoadJSON();
+        JsonDataToUsableData();
     }
 
     void LoadJSON()
@@ -83,34 +84,40 @@ public class JSONReader : MonoBehaviour
         {
             string dataAsJson = File.ReadAllText(filePath);
             // Pass the json to JsonUtility, and tell it to create a GameData object from it
-             loadedData = JsonUtility.FromJson<Rootobject>("{\"jsonObject\":" + dataAsJson + "}");
+            loadedData = JsonUtility.FromJson<Rootobject>("{\"jsonObject\":" + dataAsJson + "}");
             
         }
         else
         {
             Debug.Log("Error to open JSON");
         }
+    }
 
-        GetJsonData(0, "Accident_Index");
+
+    public void JsonDataToUsableData()
+    {
+        for(int i = 0; i < loadedData.jsonObject.Count; i++)
+        {
+            UsableData new_data = new UsableData();
+            //check if the accident involves a pedestrian casualty, otherwise we skip it
+            if(new_data.ConvertStringToLocation(loadedData.jsonObject[i].Pedestrian_Location) == accident_locations.none)
+            {
+                continue;
+            }
+            //here we load the data into usable data formats
+            new_data.location = new_data.ConvertStringToLocation(loadedData.jsonObject[i].Pedestrian_Location);
+            new_data.severity = new_data.ConvertStringToSeverity(loadedData.jsonObject[i].Casualty_Severity);
+            new_data.weather = new_data.ConvertStringToWeather(loadedData.jsonObject[i].Weather_Conditions);
+            new_data.lighting = new_data.ConvertStringToLighting(loadedData.jsonObject[i].Light_Conditions);
+            new_data.day = new_data.ConvertStringToWeekday(loadedData.jsonObject[i].Day_of_Week);
+            new_data.age = int.Parse(loadedData.jsonObject[i].Age_of_Casualty);
+            new_data.time = new_data.ConvertStringToTime(loadedData.jsonObject[i].Time);
+            new_data.speed = int.Parse(loadedData.jsonObject[i].Speed_limit);
+
+            //add it to the cruncher so it can create statistics based on the new datas
+            cruncher.AddDataToList(new_data);
+
         }
-
-    // Update is called once per frame
-    void Update()
-    {
-
     }
 
-    public string GetJsonData(int objectNo, string objectData)
-    {
-
-        string JsonObject = loadedData.jsonObject[objectNo].ToString();
-        //loadedData.jsonObject[objectNo].ToString();
-        // Debug.Log(loadedData.jsonObject[0].Pedestrian_CrossingPhysical_Facilities.ToString());
-
-        //in a loop
-        //usableData new data
-        //new data.time = JsonObject.Items[3]["time"].Tostring;
-        //data.weather = JsonObject.Items[3].weather;
-        return "JsonObject";
-    }
 }

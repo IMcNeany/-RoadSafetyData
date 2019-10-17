@@ -5,7 +5,7 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public int                  speed_of_cars = 0;
-    public weather_conditions   current_weather;
+    public accident_weather   current_weather;
     public int                  current_day;
     public int                  current_time;
 //----------------------------------------------------------------
