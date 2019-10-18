@@ -94,7 +94,7 @@ public class JSONReader : MonoBehaviour
         {
             UsableData new_data = new UsableData();
             //check if the accident involves a pedestrian casualty, otherwise we skip it
-            if(new_data.ConvertStringToLocation(loadedData.jsonObject[i].Pedestrian_Location) == accident_locations.none)
+            if(new_data.ConvertStringToLocation(loadedData.jsonObject[i].Pedestrian_Location) == accident_location.none)
             {
                 continue;
             }

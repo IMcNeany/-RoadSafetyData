@@ -3,18 +3,20 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
-public struct WeatherChance
+public class StatChance
 {
-    public accident_weather type;
-    public int amount;
-    public float percentage_chance;
+    public int amount = 0;
+    public float percentage_chance = 0;
+    public string enum_type;
 }
 
 [System.Serializable]
 public class DataCruncher : MonoBehaviour
 {
     public List<UsableData> usable_data_list;
-    public List<WeatherChance> weather_chances;
+    public List<StatChance> weather_chances;
+    public List<StatChance> location_chances;
+    public List<StatChance> speed_chances;
 //--------------------------------------------------------
     private int num_accidents_in_year;
     private int num_people_uk = 66040000;
@@ -27,35 +29,84 @@ public class DataCruncher : MonoBehaviour
     public void CrunchNumbers()
     {
         num_accidents_in_year = usable_data_list.Count;
-        GetWeatherChances();
+        GetChances(weather_chances, "accident_weather");
+        GetChances(location_chances, "accident_location");
+        GetChances(speed_chances, "speed");
     }
 
-    public void GetWeatherChances()
+    public void GetChances(List<StatChance> stat_list, string enum_string)
     {
-        if(weather_chances != null)
+        List<int> temp_data = new List<int>();
+        if(stat_list != null)
         {
-            weather_chances.Clear();
+            stat_list.Clear();
         }
 
         int total = usable_data_list.Count;
 
-        for(int i = 0; i < (int)accident_weather.NUMSTATS; i++)
+        switch(enum_string)
         {
-            WeatherChance new_chance;
-            int count = 0;
-            for(int j = 0; j < usable_data_list.Count; j++)
-            {
-                if((int)usable_data_list[j].weather == i)
+            case "accident_weather":
+                for (int i = 0; i < (int)accident_weather.NUMSTATS; i++)
                 {
-                    count++;
+                    int count = 0;
+                    for (int j = 0; j < usable_data_list.Count; j++)
+                    {
+                        if ((int)usable_data_list[j].weather == i)
+                        {
+                            count++;
+                        }
+                    }
+                    StatChance new_chance = new StatChance();
+                    new_chance.amount = count;
+                    var weather_status = (accident_weather)i;
+                    new_chance.enum_type = weather_status.ToString();
+                    new_chance.percentage_chance = (float)count / (float)num_accidents_in_year * 100;
+                    stat_list.Add(new_chance);
                 }
-            }
-            new_chance.type = (accident_weather)i;
-            new_chance.amount = count;
-
-            new_chance.percentage_chance = count / num_accidents_in_year * 100;
-
-            weather_chances.Add(new_chance);
+                break;
+            case "accident_location":
+                for (int i = 0; i < (int)accident_location.NUMSTATS; i++)
+                {
+                    int count = 0;
+                    for (int j = 0; j < usable_data_list.Count; j++)
+                    {
+                        if ((int)usable_data_list[j].location == i)
+                        {
+                            count++;
+                        }
+                    }
+                    StatChance new_chance = new StatChance();
+                    new_chance.amount = count;
+                    var location_status = (accident_location)i;
+                    new_chance.enum_type = location_status.ToString();
+                    new_chance.percentage_chance = (float)count / (float)num_accidents_in_year * 100;
+                    stat_list.Add(new_chance);
+                }
+                break;
+            case "speed":
+                for (int i = 0; i < 100; i++)
+                {
+                    int count = 0;
+                    for (int j = 0; j < usable_data_list.Count; j++)
+                    {
+                        if ((int)usable_data_list[j].speed == i)
+                        {
+                            count++;
+                        }
+                    }
+                    if(count == 0)
+                    {
+                        continue;
+                    }
+                    StatChance new_chance = new StatChance();
+                    new_chance.amount = count;
+                    var location_status = (accident_location)i;
+                    new_chance.enum_type = location_status.ToString();
+                    new_chance.percentage_chance = (float)count / (float)num_accidents_in_year * 100;
+                    stat_list.Add(new_chance);
+                }
+                break;
         }
     }
 }

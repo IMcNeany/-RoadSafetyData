@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum accident_locations
+public enum accident_location
 {
     none,
     crossing,
@@ -58,7 +58,7 @@ public enum accident_lighting
 [System.Serializable]
 public class UsableData
 {
-    public accident_locations location;
+    public accident_location  location;
     public accident_severity  severity;
     public accident_weather   weather;
     public accident_lighting  lighting;
@@ -67,41 +67,41 @@ public class UsableData
     public int                time;
     public int                speed;
 
-    public accident_locations ConvertStringToLocation(string str)
+    public accident_location ConvertStringToLocation(string str)
     {
-        accident_locations new_location = accident_locations.crossing;
+        accident_location new_location = accident_location.crossing;
      
         switch(str)
         {
             case "1":
-                new_location = accident_locations.crossing;
+                new_location = accident_location.crossing;
                 break;
             case "2":
-                new_location = accident_locations.approach;
+                new_location = accident_location.approach;
                 break;
             case "3":
-                new_location = accident_locations.exit;
+                new_location = accident_location.exit;
                 break;
             case "4":
-                new_location = accident_locations.nearby;
+                new_location = accident_location.nearby;
                 break;
             case "5":
-                new_location = accident_locations.carriageway;
+                new_location = accident_location.carriageway;
                 break;
             case "6":
-                new_location = accident_locations.pavement;
+                new_location = accident_location.pavement;
                 break;
             case "7":
-                new_location = accident_locations.carriageway;
+                new_location = accident_location.carriageway;
                 break;
             case "8":
-                new_location = accident_locations.carriageway;
+                new_location = accident_location.carriageway;
                 break;
             case "9":
-                new_location = accident_locations.carriageway;
+                new_location = accident_location.carriageway;
                 break;
             default:
-                new_location = accident_locations.none;
+                new_location = accident_location.none;
                 break;
         }
         return new_location;

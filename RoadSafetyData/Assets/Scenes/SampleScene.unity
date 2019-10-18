@@ -435,6 +435,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   usable_data_list: []
+  weather_chances: []
+  location_chances: []
+  speed_chances: []
 --- !u!1 &937759651
 GameObject:
   m_ObjectHideFlags: 0
