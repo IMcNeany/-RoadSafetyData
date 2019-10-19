@@ -21,7 +21,6 @@ public class Connection : MonoBehaviour
 
     public GameObject GetNextConnection(GameObject first_connection)
     {
-        Debug.Log(first_connection.name);
         if(first_connection == connection_1)
         {
             return connection_2;

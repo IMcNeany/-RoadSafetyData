@@ -15,9 +15,12 @@ public class PersonMovement : MonoBehaviour
     private bool fading = false;
     private Animator animator;
     public bool crossed = false;
+    private bool direction = true; //random forward/backward
+    private bool should_cross; //random if person should try to cross?
 
     void Start()
     {
+        should_cross = (Random.value > 0.5f);
         current_target = current_waypoints.waypoints[0];
         animator = GetComponentInChildren<Animator>();
         if(current_waypoints)
@@ -28,6 +31,7 @@ public class PersonMovement : MonoBehaviour
                 connection_start = current_waypoints.connection_start;
             }
         }
+
     }
 
     void Update()
@@ -35,14 +39,26 @@ public class PersonMovement : MonoBehaviour
         MovePerson();
     }
 
+
+    //yeah I know this is confusing.
     private void MovePerson()
     {
-        int final_point = current_waypoints.waypoints.Count - 1;
-        if (current_target == current_waypoints.waypoints[final_point])
+        int end_index = current_waypoints.waypoints.Count - 1;
+        int start_index = 0;
+        if (current_target == current_waypoints.waypoints[end_index] && crossed)
         {
             if ((Vector3.Distance(transform.position, current_target.transform.position) < 0.5f))
             {
                 FadeAway();
+                return;
+            }
+        }
+        else if(current_target == current_waypoints.waypoints[start_index] && crossed)
+        {
+            if ((Vector3.Distance(transform.position, current_target.transform.position) < 0.5f))
+            {
+                FadeAway();
+                return;
             }
         }
         else
@@ -51,6 +67,11 @@ public class PersonMovement : MonoBehaviour
             {
                 if(current_target == connection_start && crossed == false)
                 {
+                    if (should_cross)
+                    {
+                        crossed = true; //use this so stop crossing and continue walking on same side
+                        return;
+                    }
                     if (current_connection.crossable)
                     {
                         connection_end = current_connection.GetNextConnection(connection_start);
@@ -76,10 +97,18 @@ public class PersonMovement : MonoBehaviour
                             current_waypoints = current_connection.way_points1;
                         }
                         current_target = current_waypoints.waypoints[waypoint_index];
+                        direction = (Random.value > 0.5f);
                     }
                     else
                     {
-                        waypoint_index++;
+                        if(direction)
+                        {
+                            waypoint_index++;
+                        }
+                        else
+                        {
+                            waypoint_index--;
+                        }
                         current_target = current_waypoints.waypoints[waypoint_index];
                     }
                 }
@@ -93,12 +122,13 @@ public class PersonMovement : MonoBehaviour
 
     private void FadeAway()
     {
-        waiting = true;
+        animator.SetBool("Moving", false);
         //fade away at the end of the path
     }
 
     private void FadeIn()
     {
+        animator.SetBool("Moving", false);
         //fade in at start of path
     }
 }
