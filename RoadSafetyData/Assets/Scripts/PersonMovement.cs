@@ -5,38 +5,55 @@ using UnityEngine;
 public class PersonMovement : MonoBehaviour
 {
     public float speed = 1.0f;
+    public float fade_speed = 0.5f;
+    private float current_fade = 0.0f;
     public MoveWaypoints current_waypoints;
     public Connection current_connection;
     public GameObject connection_start;
     public GameObject connection_end;
     public bool waiting = false;
     public GameObject current_target;
-    private int waypoint_index = 0;
-    private bool fading = false;
+    public int waypoint_index = 0;
     private Animator animator;
     public bool crossed = false;
-    private bool direction = true; //random forward/backward
+    public bool direction = true; //random forward/backward
     private bool should_cross; //random if person should try to cross?
+    public PeopleSpawner spawner;
+    private Collider this_collider;
 
     void Start()
     {
-        should_cross = (Random.value > 0.5f);
-        current_target = current_waypoints.waypoints[0];
+        this_collider = GetComponent<Collider>();
         animator = GetComponentInChildren<Animator>();
-        if(current_waypoints)
+        ResetValues();
+        Physics.IgnoreLayerCollision(8, 8);
+    }
+
+    void Update()
+    {
+        if(!waiting)
         {
-            if(current_waypoints.connection)
+            MovePerson();
+        }
+        else
+        {
+            FadeIn();
+        }
+    }
+
+    public void ResetValues()
+    {
+        should_cross = (Random.value > 0.5f);
+        if (current_waypoints)
+        {
+            if (current_waypoints.connection)
             {
                 current_connection = current_waypoints.connection;
                 connection_start = current_waypoints.connection_start;
             }
         }
-
-    }
-
-    void Update()
-    {
-        MovePerson();
+        crossed = false;
+        waiting = true;
     }
 
 
@@ -45,6 +62,8 @@ public class PersonMovement : MonoBehaviour
     {
         int end_index = current_waypoints.waypoints.Count - 1;
         int start_index = 0;
+
+        //start and end of waypoints, have the character fade in or out
         if (current_target == current_waypoints.waypoints[end_index] && crossed)
         {
             if ((Vector3.Distance(transform.position, current_target.transform.position) < 0.5f))
@@ -63,6 +82,7 @@ public class PersonMovement : MonoBehaviour
         }
         else
         {
+            //move character toward waypoints, if a waypoint is a connection, decide if character should cross
             if ((Vector3.Distance(transform.position, current_target.transform.position) < 0.5f))
             {
                 if(current_target == connection_start && crossed == false)
@@ -85,6 +105,7 @@ public class PersonMovement : MonoBehaviour
                 }
                 else
                 {
+                    //chooses which side character should go after crossing
                     if(current_target == connection_end && crossed == false)
                     {
                         crossed = true;
@@ -120,15 +141,31 @@ public class PersonMovement : MonoBehaviour
         transform.rotation = Quaternion.LookRotation(target_direction);
     }
 
+    //fade away at the end of the path
     private void FadeAway()
     {
         animator.SetBool("Moving", false);
-        //fade away at the end of the path
+        current_fade -= fade_speed * Time.deltaTime;
+        if(current_fade <= 0.0f)
+        {
+            spawner.RemovePerson(gameObject);
+            current_fade = 0.0f;
+        }
     }
-
+    //fade in at start of path
     private void FadeIn()
     {
         animator.SetBool("Moving", false);
-        //fade in at start of path
+        current_fade += fade_speed * Time.deltaTime;
+        if (current_fade >= 1.0f)
+        {
+            waiting = false;
+            current_fade = 1.0f;
+        }
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        Debug.Log(collision.gameObject.name);
     }
 }
