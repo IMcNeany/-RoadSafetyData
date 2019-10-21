@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Person
   - Road
+  - Lamp
   layers:
   - Default
   - TransparentFX
