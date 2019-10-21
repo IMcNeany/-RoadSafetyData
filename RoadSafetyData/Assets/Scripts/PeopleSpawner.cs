@@ -6,8 +6,6 @@ public class PeopleSpawner : MonoBehaviour
 {
     public MoveWaypoints side_1;
     public MoveWaypoints side_2;
-    public MoveWaypoints side_3;
-    public MoveWaypoints side_4;
     public List<GameObject> spawn_locations;
     public ObjectPooler OP;
     public int max_people;
@@ -21,8 +19,8 @@ public class PeopleSpawner : MonoBehaviour
         spawn_locations.Add(side_1.waypoints[side_1.waypoints.Count - 1]);
         spawn_locations.Add(side_2.waypoints[0]);
         spawn_locations.Add(side_2.waypoints[side_2.waypoints.Count - 1]);
-        spawn_locations.Add(side_3.waypoints[0]);
-        spawn_locations.Add(side_4.waypoints[0]);
+        //spawn_locations.Add(side_3.waypoints[0]);
+        //spawn_locations.Add(side_4.waypoints[0]);
         
     }
 
@@ -68,7 +66,7 @@ public class PeopleSpawner : MonoBehaviour
     {
         GameObject new_person = OP.GetPooledObject();
 
-        int random = Random.Range(0, 6);
+        int random = Random.Range(0, 4);
         new_person.transform.position = spawn_locations[random].transform.position;
         new_person.transform.parent = transform;
         PersonMovement PM = new_person.GetComponent<PersonMovement>();
@@ -92,14 +90,6 @@ public class PeopleSpawner : MonoBehaviour
             case 3:
                 PM.waypoint_index = PM.current_waypoints.waypoints.Count - 1;
                 PM.direction = false;
-                break;
-            case 4:
-                PM.waypoint_index = 0;
-                PM.direction = true;
-                break;
-            case 5:
-                PM.waypoint_index = 0;
-                PM.direction = true;
                 break;
         }
         PM.ResetValues();
