@@ -7,6 +7,8 @@ public class Connection : MonoBehaviour
 {
     public GameObject connection_1;
     public GameObject connection_2;
+    public GameObject connection_3;
+    public GameObject connection_4;
     public MoveWaypoints way_points1;
     public MoveWaypoints way_points2;
     public bool crossable = false;
