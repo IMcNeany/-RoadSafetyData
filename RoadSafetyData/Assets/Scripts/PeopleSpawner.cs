@@ -6,6 +6,8 @@ public class PeopleSpawner : MonoBehaviour
 {
     public MoveWaypoints side_1;
     public MoveWaypoints side_2;
+    public MoveWaypoints side_3;
+    public MoveWaypoints side_4;
     public List<GameObject> spawn_locations;
     public ObjectPooler OP;
     public int max_people;
@@ -19,6 +21,10 @@ public class PeopleSpawner : MonoBehaviour
         spawn_locations.Add(side_1.waypoints[side_1.waypoints.Count - 1]);
         spawn_locations.Add(side_2.waypoints[0]);
         spawn_locations.Add(side_2.waypoints[side_2.waypoints.Count - 1]);
+        spawn_locations.Add(side_3.waypoints[0]);
+        spawn_locations.Add(side_3.waypoints[side_3.waypoints.Count - 1]);
+        spawn_locations.Add(side_4.waypoints[0]);
+        spawn_locations.Add(side_4.waypoints[side_4.waypoints.Count - 1]);
     }
 
     void Update()
