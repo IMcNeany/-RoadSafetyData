@@ -19,6 +19,7 @@ public class PersonMovement : MonoBehaviour
     public bool direction = true; //random forward/backward
     private bool should_cross; //random if person should try to cross?
     public PeopleSpawner spawner;
+    public bool stop_moving = false;
     private Collider this_collider;
 
     void Start()
@@ -31,14 +32,18 @@ public class PersonMovement : MonoBehaviour
 
     void Update()
     {
-        if(!waiting)
+        if(!stop_moving)
         {
-            MovePerson();
+            if (!waiting)
+            {
+                MovePerson();
+            }
+            else
+            {
+                FadeIn();
+            }
         }
-        else
-        {
-            FadeIn();
-        }
+        
     }
 
     public void ResetValues()
@@ -167,5 +172,9 @@ public class PersonMovement : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
         Debug.Log(collision.gameObject.name);
+        if(collision.gameObject.tag == "Car")
+        {
+            stop_moving = true;
+        }
     }
 }
