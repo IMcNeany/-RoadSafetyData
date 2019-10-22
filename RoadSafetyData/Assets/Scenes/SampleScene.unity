@@ -1252,6 +1252,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 346101546}
     m_Modifications:
+    - target: {fileID: 100000, guid: 6ccf60a3a8bf99947989819a98b390fd, type: 3}
+      propertyPath: m_Name
+      value: Building_3
+      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 6ccf60a3a8bf99947989819a98b390fd, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.4018
@@ -1307,10 +1311,6 @@ PrefabInstance:
     - target: {fileID: 400000, guid: 6ccf60a3a8bf99947989819a98b390fd, type: 3}
       propertyPath: m_LocalScale.z
       value: 0.25
-      objectReference: {fileID: 0}
-    - target: {fileID: 100000, guid: 6ccf60a3a8bf99947989819a98b390fd, type: 3}
-      propertyPath: m_Name
-      value: Building_3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6ccf60a3a8bf99947989819a98b390fd, type: 3}
@@ -2295,6 +2295,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 346101546}
     m_Modifications:
+    - target: {fileID: 100000, guid: 1db17ffbe5af09c4193413071082ed5b, type: 3}
+      propertyPath: m_Name
+      value: Building_2
+      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 1db17ffbe5af09c4193413071082ed5b, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.173
@@ -2350,10 +2354,6 @@ PrefabInstance:
     - target: {fileID: 400000, guid: 1db17ffbe5af09c4193413071082ed5b, type: 3}
       propertyPath: m_LocalScale.z
       value: 0.25
-      objectReference: {fileID: 0}
-    - target: {fileID: 100000, guid: 1db17ffbe5af09c4193413071082ed5b, type: 3}
-      propertyPath: m_Name
-      value: Building_2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1db17ffbe5af09c4193413071082ed5b, type: 3}
@@ -2530,7 +2530,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 8ae864328366c314e9fdfa39336f8103, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
