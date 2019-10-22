@@ -21,9 +21,11 @@ public class PersonMovement : MonoBehaviour
     public PeopleSpawner spawner;
     public bool stop_moving = false;
     private Collider this_collider;
+    private Rigidbody RB;
 
     void Start()
     {
+        RB = GetComponent<Rigidbody>();
         this_collider = GetComponent<Collider>();
         animator = GetComponentInChildren<Animator>();
         ResetValues();
@@ -42,6 +44,11 @@ public class PersonMovement : MonoBehaviour
             {
                 FadeIn();
             }
+        }
+        else
+        {
+            animator.SetBool("Moving", false);
+            
         }
         
     }
