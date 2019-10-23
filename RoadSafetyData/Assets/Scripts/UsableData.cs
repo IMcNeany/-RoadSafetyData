@@ -218,7 +218,16 @@ public class UsableData
 
     public int ConvertStringToTime(string str)
     {
-        string hour_str = str[0] + "" + str[1];
+        string hour_str = "";
+        if (str[1].ToString() == ":")
+        {
+            hour_str = 0 + str[0].ToString();
+            Debug.Log(hour_str.ToString());
+        }
+        else
+        {
+            hour_str = str[0] + "" + str[1];
+        }
         int hour_int = int.Parse(hour_str);
         return hour_int;
     }

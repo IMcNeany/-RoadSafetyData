@@ -17,7 +17,10 @@ public class DataCruncher : MonoBehaviour
     public List<StatChance> weather_chances;
     public List<StatChance> location_chances;
     public List<StatChance> speed_chances;
-//--------------------------------------------------------
+    public List<StatChance> light_chances;
+    public List<StatChance> day_chances;
+    public List<StatChance> fatality_chances;
+    //--------------------------------------------------------
     private int num_accidents_in_year;
     private int num_people_uk = 66040000;
 
@@ -32,6 +35,9 @@ public class DataCruncher : MonoBehaviour
         GetChances(weather_chances, "accident_weather");
         GetChances(location_chances, "accident_location");
         GetChances(speed_chances, "speed");
+        GetChances(light_chances, "Light_Conditions");
+        GetChances(day_chances, "Day_of_Week");
+        GetChances(fatality_chances, "Accident_Severity");
     }
 
     public void GetChances(List<StatChance> stat_list, string enum_string)
@@ -107,6 +113,64 @@ public class DataCruncher : MonoBehaviour
                     stat_list.Add(new_chance);
                 }
                 break;
+            case "Light_Conditions":
+                for (int i = 0; i < (int)accident_lighting.NUMSTATS; i++)
+                {
+                    int count = 0;
+                    for (int j = 0; j < usable_data_list.Count; j++)
+                    {
+                        if ((int)usable_data_list[j].lighting == i)
+                        {
+                            count++;
+                        }
+                    }
+                    StatChance new_chance = new StatChance();
+                    new_chance.amount = count;
+                    var lighting_status = (accident_lighting)i;
+                    new_chance.enum_type = lighting_status.ToString();
+                    new_chance.percentage_chance = (float)count / (float)num_accidents_in_year * 100;
+                    stat_list.Add(new_chance);
+                }
+                break;
+            case "Day_of_Week":
+                for (int i = 0; i < (int)accident_weekday.NUMSTATS; i++)
+                {
+                    int count = 0;
+                    for (int j = 0; j < usable_data_list.Count; j++)
+                    {
+                        if ((int)usable_data_list[j].day == i)
+                        {
+                            count++;
+                        }
+                    }
+                    StatChance new_chance = new StatChance();
+                    new_chance.amount = count;
+                    var day_status = (accident_weekday)i;
+                    new_chance.enum_type = day_status.ToString();
+                    new_chance.percentage_chance = (float)count / (float)num_accidents_in_year * 100;
+                    stat_list.Add(new_chance);
+                }
+                break;
+            case "Accident_Severity":
+                for (int i = 0; i < (int)accident_severity.NUMSTATS; i++)
+                {
+                    int count = 0;
+                    for (int j = 0; j < usable_data_list.Count; j++)
+                    {
+                        if ((int)usable_data_list[j].day == i)
+                        {
+                            count++;
+                        }
+                    }
+                    StatChance new_chance = new StatChance();
+                    new_chance.amount = count;
+                    var serverity_status = (accident_severity)i;
+                    new_chance.enum_type = serverity_status.ToString();
+                    new_chance.percentage_chance = (float)count / (float)num_accidents_in_year * 100;
+                    stat_list.Add(new_chance);
+                }
+                break;
+
         }
     }
 }

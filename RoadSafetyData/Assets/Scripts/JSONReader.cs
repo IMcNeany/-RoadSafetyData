@@ -105,7 +105,7 @@ public class JSONReader : MonoBehaviour
             new_data.lighting = new_data.ConvertStringToLighting(loadedData.jsonObject[i].Light_Conditions);
             new_data.day = new_data.ConvertStringToWeekday(loadedData.jsonObject[i].Day_of_Week);
             new_data.age = int.Parse(loadedData.jsonObject[i].Age_of_Casualty);
-            new_data.time = new_data.ConvertStringToTime(loadedData.jsonObject[i].Time);
+            new_data.time = new_data.ConvertStringToTime(loadedData.jsonObject[i].Time.ToString());
             new_data.speed = int.Parse(loadedData.jsonObject[i].Speed_limit);
 
             //add it to the cruncher so it can create statistics based on the new datas
