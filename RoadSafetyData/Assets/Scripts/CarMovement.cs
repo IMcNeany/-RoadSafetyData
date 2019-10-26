@@ -11,18 +11,36 @@ public class CarMovement : MonoBehaviour
     private float current_speed = 0.0f;
     public bool should_move = true;
     public int waypoint_index = 0;
+    private float current_fade = 0.0f;
+    public float fade_speed = 1.0f;
+    public CarSpawner spawner;
+    private bool waiting = true;
+    private Material mat;
     // Start is called before the first frame update
     void Start()
     {
         current_target = current_waypoints.waypoints[0];
+        Physics.IgnoreLayerCollision(9, 9);
+        mat = GetComponentInChildren<MeshRenderer>().material;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(should_move)
+        Color color = mat.color;
+        color.a = current_fade;
+        mat.color = color;
+
+        if (should_move)
         {
-            MoveCar();
+            if(waiting)
+            {
+                FadeIn();
+            }
+            else
+            {
+                MoveCar();
+            }
         }
     }
 
@@ -59,13 +77,30 @@ public class CarMovement : MonoBehaviour
         }
     }
 
-    public void FadeAway()
+    private void FadeAway()
     {
+        current_fade -= fade_speed * Time.deltaTime;
 
+        if (current_fade <= 0.0f)
+        {
+            spawner.RemoveCar(gameObject);
+            current_fade = 0.0f;
+        }
     }
 
-    public void FadeIn()
+    private void FadeIn()
     {
 
+        current_fade += fade_speed * Time.deltaTime;
+        if (current_fade >= 1.0f)
+        {
+            current_fade = 1.0f;
+            waiting = false;
+        }
+    }
+
+    public void ResetValues()
+    {
+        waiting = true;
     }
 }
