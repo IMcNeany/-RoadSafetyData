@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -26,6 +27,8 @@ public class GameManager : MonoBehaviour
     private float lightingChance = 0;
     private float severityChance =0;
 
+    [SerializeField] private GameObject _chart;
+
 
     void Start()
     {
@@ -43,6 +46,8 @@ public class GameManager : MonoBehaviour
         //percentage_accident = (float)num_accidents_in_year / (float)num_people_uk * 100.0f;
 
         percentage_accident = (weatherChance + dayChance + lightingChance + severityChance) / 4;
+
+        _chart.transform.GetChild(0).GetComponent<Image>().fillAmount = percentage_accident / 100;
     }
 
     //default chance of accident without pedestrian data

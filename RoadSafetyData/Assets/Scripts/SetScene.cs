@@ -25,6 +25,10 @@ public class SetScene : MonoBehaviour
     void Start()
     {
       //  gm = gameObject.GetComponent<GameManager>();
+      OnWeatherChanged();
+      OnLightingChanged();
+      OnDayChanged();
+      OnSeverityChanged();
     }
 
     // Update is called once per frame
