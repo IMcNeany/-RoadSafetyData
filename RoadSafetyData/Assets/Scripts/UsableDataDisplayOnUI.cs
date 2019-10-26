@@ -14,12 +14,18 @@ public class UsableDataDisplayOnUI : MonoBehaviour
     void Start()
     {
         InitialiseNamesOfEnumsArray();
-        
+
         for (int i = 0; i < _namesOfEnums.Length; i++)
         {
             gameObject.transform.GetChild(i).GetComponent<TMP_Dropdown>().ClearOptions();
+            // Create a list
+            List<string> tempList = new List<string>();
+            tempList = Enum.GetNames(Type.GetType(_namesOfEnums[i])).ToList();
+            // Remove last element 
+            tempList.RemoveAt(tempList.Count - 1);
+            // Pass to the dropdown
             gameObject.transform.GetChild(i).GetComponent<TMP_Dropdown>()
-                .AddOptions(Enum.GetNames(Type.GetType(_namesOfEnums[i])).ToList());
+                .AddOptions(tempList);
         }
     }
 
