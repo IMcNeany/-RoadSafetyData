@@ -46,12 +46,12 @@ public class CarSpawner : MonoBehaviour
 
     public void AddCar()
     {
-        GameObject new_person = OP.GetPooledObject();
-
+        GameObject new_car = OP.GetPooledObject();
         int random = Random.Range(0, 2);
-        new_person.transform.position = spawn_locations[random].transform.position;
-        new_person.transform.parent = transform;
-        CarMovement CM = new_person.GetComponent<CarMovement>();
+        new_car.transform.position = spawn_locations[random].transform.position;
+        new_car.transform.rotation = spawn_locations[random].transform.rotation;
+        new_car.transform.parent = transform;
+        CarMovement CM = new_car.GetComponent<CarMovement>();
 
         switch(random)
         {
@@ -62,8 +62,9 @@ public class CarSpawner : MonoBehaviour
                 CM.current_waypoints = right_side;
                 break;
         }
-
-        new_person.SetActive(true);
+        CM.spawner = this;
+        CM.ResetValues();
+        new_car.SetActive(true);
     }
 
     public void RemoveCar(GameObject obj)
@@ -76,6 +77,4 @@ public class CarSpawner : MonoBehaviour
             }
         }
     }
-
-
 }

@@ -21,11 +21,12 @@ public class PersonMovement : MonoBehaviour
     public PeopleSpawner spawner;
     public bool stop_moving = false;
     private Collider this_collider;
-    private Rigidbody RB;
+    private bool hit = false;
+    private Material mat;
 
     void Start()
     {
-        RB = GetComponent<Rigidbody>();
+        mat = GetComponentInChildren<MeshRenderer>().material;
         this_collider = GetComponent<Collider>();
         animator = GetComponentInChildren<Animator>();
         ResetValues();
@@ -34,6 +35,10 @@ public class PersonMovement : MonoBehaviour
 
     void Update()
     {
+        Color color = mat.color;
+        color.a = current_fade;
+        mat.color = color;
+
         if(!stop_moving)
         {
             if (!waiting)
@@ -49,6 +54,11 @@ public class PersonMovement : MonoBehaviour
         {
             animator.SetBool("Moving", false);
             
+        }
+
+        if(hit)
+        {
+            FadeAway();
         }
         
     }
@@ -66,6 +76,7 @@ public class PersonMovement : MonoBehaviour
         }
         crossed = false;
         waiting = true;
+        hit = false;
     }
 
 
@@ -158,6 +169,7 @@ public class PersonMovement : MonoBehaviour
     {
         animator.SetBool("Moving", false);
         current_fade -= fade_speed * Time.deltaTime;
+
         if(current_fade <= 0.0f)
         {
             spawner.RemovePerson(gameObject);
@@ -178,10 +190,11 @@ public class PersonMovement : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        Debug.Log(collision.gameObject.name);
-        if(collision.gameObject.tag == "Car")
+        if(collision.gameObject.tag == "Car" && hit == false)
         {
             stop_moving = true;
+            hit = true;
+            this_collider.enabled = false;
         }
     }
 }

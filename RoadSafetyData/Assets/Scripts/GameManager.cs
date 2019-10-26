@@ -32,6 +32,7 @@ public class GameManager : MonoBehaviour
         json_reader = GetComponentInChildren<JSONReader>();
         data_cruncher = GetComponentInChildren<DataCruncher>();
 
+
         json_reader.LoadJSON();
         data_cruncher.CrunchNumbers();
         UpdatePercentageAccident();
