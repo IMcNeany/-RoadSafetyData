@@ -769,10 +769,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 346101546}
     m_Modifications:
-    - target: {fileID: 100000, guid: 1db17ffbe5af09c4193413071082ed5b, type: 3}
-      propertyPath: m_Name
-      value: Building_2 (1)
-      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 1db17ffbe5af09c4193413071082ed5b, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.164
@@ -828,6 +824,10 @@ PrefabInstance:
     - target: {fileID: 400000, guid: 1db17ffbe5af09c4193413071082ed5b, type: 3}
       propertyPath: m_LocalScale.z
       value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 1db17ffbe5af09c4193413071082ed5b, type: 3}
+      propertyPath: m_Name
+      value: Building_2 (1)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1db17ffbe5af09c4193413071082ed5b, type: 3}
@@ -984,6 +984,9 @@ MonoBehaviour:
   night: {fileID: 1227704482}
   lampPosts: {fileID: 567973563}
   LightingDropBox: {fileID: 953776580}
+  DayDropbox: {fileID: 1236462292}
+  SeverityDropBox: {fileID: 1804740342}
+  gm: {fileID: 647830850}
 --- !u!1001 &666171951
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1514,10 +1517,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 346101546}
     m_Modifications:
-    - target: {fileID: 100000, guid: 6ccf60a3a8bf99947989819a98b390fd, type: 3}
-      propertyPath: m_Name
-      value: Building_3 (1)
-      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 6ccf60a3a8bf99947989819a98b390fd, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.3667
@@ -1573,6 +1572,10 @@ PrefabInstance:
     - target: {fileID: 400000, guid: 6ccf60a3a8bf99947989819a98b390fd, type: 3}
       propertyPath: m_LocalScale.z
       value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 6ccf60a3a8bf99947989819a98b390fd, type: 3}
+      propertyPath: m_Name
+      value: Building_3 (1)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6ccf60a3a8bf99947989819a98b390fd, type: 3}
@@ -1635,10 +1638,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 346101546}
     m_Modifications:
-    - target: {fileID: 100000, guid: 6ccf60a3a8bf99947989819a98b390fd, type: 3}
-      propertyPath: m_Name
-      value: Building_3
-      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 6ccf60a3a8bf99947989819a98b390fd, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.03200002
@@ -1694,6 +1693,10 @@ PrefabInstance:
     - target: {fileID: 400000, guid: 6ccf60a3a8bf99947989819a98b390fd, type: 3}
       propertyPath: m_LocalScale.z
       value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 6ccf60a3a8bf99947989819a98b390fd, type: 3}
+      propertyPath: m_Name
+      value: Building_3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6ccf60a3a8bf99947989819a98b390fd, type: 3}
@@ -2176,6 +2179,66 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalPosition.z
       value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7932745903056915135, guid: 4844e09d2cc38e441a6126fd38372626,
+        type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7932745903056915135, guid: 4844e09d2cc38e441a6126fd38372626,
+        type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7932745903056915135, guid: 4844e09d2cc38e441a6126fd38372626,
+        type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7932745903056915135, guid: 4844e09d2cc38e441a6126fd38372626,
+        type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 647830852}
+    - target: {fileID: 7932745903056915135, guid: 4844e09d2cc38e441a6126fd38372626,
+        type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnSeverityChanged
+      objectReference: {fileID: 0}
+    - target: {fileID: 7932745903056915135, guid: 4844e09d2cc38e441a6126fd38372626,
+        type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 7932745903369306647, guid: 4844e09d2cc38e441a6126fd38372626,
+        type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7932745903369306647, guid: 4844e09d2cc38e441a6126fd38372626,
+        type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7932745903369306647, guid: 4844e09d2cc38e441a6126fd38372626,
+        type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7932745903369306647, guid: 4844e09d2cc38e441a6126fd38372626,
+        type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 647830852}
+    - target: {fileID: 7932745903369306647, guid: 4844e09d2cc38e441a6126fd38372626,
+        type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnDayChanged
+      objectReference: {fileID: 0}
+    - target: {fileID: 7932745903369306647, guid: 4844e09d2cc38e441a6126fd38372626,
+        type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4844e09d2cc38e441a6126fd38372626, type: 3}
@@ -7372,6 +7435,18 @@ Transform:
   m_Father: {fileID: 1264010276}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!114 &1236462292 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7932745903369306647, guid: 4844e09d2cc38e441a6126fd38372626,
+    type: 3}
+  m_PrefabInstance: {fileID: 1056042034}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b743370ac3e4ec2a1668f5455a8ef8a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1264010275
 GameObject:
   m_ObjectHideFlags: 0
@@ -8535,6 +8610,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b3d4034243f222040b4d93939101cfee, type: 3}
+--- !u!114 &1804740342 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7932745903056915135, guid: 4844e09d2cc38e441a6126fd38372626,
+    type: 3}
+  m_PrefabInstance: {fileID: 1056042034}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b743370ac3e4ec2a1668f5455a8ef8a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &1891334392 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: 6ccf60a3a8bf99947989819a98b390fd,
@@ -8669,10 +8756,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 346101546}
     m_Modifications:
-    - target: {fileID: 100000, guid: 1db17ffbe5af09c4193413071082ed5b, type: 3}
-      propertyPath: m_Name
-      value: Building_2
-      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 1db17ffbe5af09c4193413071082ed5b, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.2
@@ -8728,6 +8811,10 @@ PrefabInstance:
     - target: {fileID: 400000, guid: 1db17ffbe5af09c4193413071082ed5b, type: 3}
       propertyPath: m_LocalScale.z
       value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 1db17ffbe5af09c4193413071082ed5b, type: 3}
+      propertyPath: m_Name
+      value: Building_2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1db17ffbe5af09c4193413071082ed5b, type: 3}

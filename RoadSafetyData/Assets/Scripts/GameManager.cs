@@ -21,6 +21,12 @@ public class GameManager : MonoBehaviour
     private JSONReader          json_reader;
     public float                percentage_accident;
 
+    private float weatherChance = 0.0f;
+    private float dayChance =0;
+    private float lightingChance = 0;
+    private float severityChance =0;
+
+
     void Start()
     {
         json_reader = GetComponentInChildren<JSONReader>();
@@ -33,7 +39,10 @@ public class GameManager : MonoBehaviour
 
     public void UpdatePercentageAccident()
     {
+        //get chances from current stats
         //percentage_accident = (float)num_accidents_in_year / (float)num_people_uk * 100.0f;
+
+        percentage_accident = (weatherChance + dayChance + lightingChance + severityChance) / 4;
     }
 
     //default chance of accident without pedestrian data
@@ -42,5 +51,36 @@ public class GameManager : MonoBehaviour
         UpdatePercentageAccident();
         default_hit_chance = 0 + (speed_of_cars / 100) * weather_multipliers[(int)current_weather] * day_multipliers[current_day] * time_multipliers[current_time];
 
+    }
+
+    public void CalculateFinalChance(int dataNo, string property)
+    {
+        //really bad way of doing this
+
+        switch(property)
+        {
+            case "weather":
+                {
+                    weatherChance = data_cruncher.weather_chances[dataNo].percentage_chance;
+                }
+                break;
+            case "day":
+                {
+                    dayChance = data_cruncher.day_chances[dataNo].percentage_chance;
+                }
+                break;
+            case "lighting":
+                {
+                    lightingChance = data_cruncher.light_chances[dataNo].percentage_chance;
+                }
+                break;
+            case "severity":
+                {
+                    severityChance = data_cruncher.fatality_chances[dataNo].percentage_chance;
+                }
+                break;
+        }
+
+        UpdatePercentageAccident();
     }
 }

@@ -15,21 +15,28 @@ public class SetScene : MonoBehaviour
     public LampPostSettings lampPosts;
     public TMPro.TMP_Dropdown LightingDropBox;
 
+    public TMPro.TMP_Dropdown DayDropbox;
+
+    public TMPro.TMP_Dropdown SeverityDropBox;
+
+    public GameManager gm;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+      //  gm = gameObject.GetComponent<GameManager>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     public void OnWeatherChanged()
     {
-       int newValue = weatherDropBox.value;
+
+        int newValue = weatherDropBox.value;
         switch (newValue)
         {
             case 0:
@@ -55,8 +62,10 @@ public class SetScene : MonoBehaviour
                 DeactivateWeather();
                 fog.SetActive(true);
                 break;
-           
+
         }
+
+        gm.CalculateFinalChance(newValue, "weather");
     }
 
     void DeactivateWeather()
@@ -91,6 +100,8 @@ public class SetScene : MonoBehaviour
                 night.SetActive(true);
                 break;
         }
+
+        gm.CalculateFinalChance(newValue, "lighting");
     }
 
     void DeactivateLighting()
@@ -100,5 +111,15 @@ public class SetScene : MonoBehaviour
         lampPosts.DisableLight();
     }
 
+    public void OnDayChanged()
+    {
+        int newValue = DayDropbox.value;
+        gm.CalculateFinalChance(newValue, "day");
+    }
 
+    public void OnSeverityChanged()
+    {
+        int newValue = SeverityDropBox.value;
+        gm.CalculateFinalChance(newValue, "severity");
+    }
 }
