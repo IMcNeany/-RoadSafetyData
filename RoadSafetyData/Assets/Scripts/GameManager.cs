@@ -29,13 +29,13 @@ public class GameManager : MonoBehaviour
     private float severityChance = 0;
 
     [SerializeField] private GameObject _chart;
-
+    private Image _fillImage;
 
     void Start()
     {
         json_reader = GetComponentInChildren<JSONReader>();
         data_cruncher = GetComponentInChildren<DataCruncher>();
-
+        _fillImage = _chart.transform.GetChild(0).GetComponent<Image>();
 
         json_reader.LoadJSON();
         data_cruncher.CrunchNumbers();
@@ -55,18 +55,29 @@ public class GameManager : MonoBehaviour
 
     private void UpdateTheChart()
     {
-/*        var tempFillAmount = _chart.transform.GetChild(0).GetComponent<Image>().fillAmount;
-        if (percentage_accident != tempFillAmount)
-        {
-            tempFillAmount = _chart.transform.GetChild(0).GetComponent<Image>().fillAmount;
+        StartCoroutine(LerpTheChartImageFill());
 
-            _chart.transform.GetChild(0).GetComponent<Image>().fillAmount =
-                Mathf.Lerp(tempFillAmount, percentage_accident, Time.deltaTime * 2f);
-        }*/
-
-        _chart.transform.GetChild(0).GetComponent<Image>().fillAmount = percentage_accident / 100;
+        // _chart.transform.GetChild(0).GetComponent<Image>().fillAmount = percentage_accident / 100;
         _chart.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text =
             Math.Round(percentage_accident, 2).ToString() + "%";
+    }
+
+    IEnumerator LerpTheChartImageFill()
+    {
+        var mappedPercentageAccident = percentage_accident / 100;
+
+        float elapsedTime = 0;
+        float waitTime = 1f;
+
+        while (elapsedTime < waitTime)
+        {
+            _fillImage.fillAmount =
+                Mathf.Lerp(_fillImage.fillAmount, mappedPercentageAccident, elapsedTime / waitTime);
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+
+        yield return null;
     }
 
     //default chance of accident without pedestrian data
