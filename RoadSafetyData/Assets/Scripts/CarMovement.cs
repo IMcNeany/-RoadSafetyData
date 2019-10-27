@@ -50,6 +50,15 @@ public class CarMovement : MonoBehaviour
     {
         int end_index = current_waypoints.waypoints.Count - 1;
         int con_index = current_waypoints.waypoints.Count - 2;
+        RaycastHit hit;
+        Debug.DrawRay(transform.position, transform.forward * 3, Color.red);
+        if (Physics.Raycast(transform.position, transform.forward, out hit, 3.0f))
+        {
+            if(hit.collider.gameObject.tag == "Car")
+            {
+                return;
+            }
+        }
 
         if (current_target == current_waypoints.waypoints[end_index])
         {
