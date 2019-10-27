@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using UnityEngine;
 using TMPro;
@@ -18,11 +19,20 @@ public class UsableDataDisplayOnUI : MonoBehaviour
         for (int i = 0; i < _namesOfEnums.Length; i++)
         {
             gameObject.transform.GetChild(i).GetComponent<TMP_Dropdown>().ClearOptions();
+            
             // Create a list
             List<string> tempList = new List<string>();
             tempList = Enum.GetNames(Type.GetType(_namesOfEnums[i])).ToList();
+            
             // Remove last element 
             tempList.RemoveAt(tempList.Count - 1);
+
+            // Capitalise the words
+            for (int j = 0; j < tempList.Count; j++)
+            {
+                tempList[j] = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(tempList[j].ToLower());
+            }
+
             // Pass to the dropdown
             gameObject.transform.GetChild(i).GetComponent<TMP_Dropdown>()
                 .AddOptions(tempList);
