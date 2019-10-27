@@ -571,6 +571,7 @@ MonoBehaviour:
   spawn_locations: []
   max_cars: 10
   spawn_delay: 3
+  crossing_ref: {fileID: 2101979704}
 --- !u!1 &343461856 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 100000, guid: c3905b20f11732a47a650703264c0cd9,

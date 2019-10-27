@@ -16,6 +16,8 @@ public class CarMovement : MonoBehaviour
     public CarSpawner spawner;
     private bool waiting = true;
     private Material mat;
+    public Connection crossing;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -47,6 +49,7 @@ public class CarMovement : MonoBehaviour
     public void MoveCar()
     {
         int end_index = current_waypoints.waypoints.Count - 1;
+        int con_index = current_waypoints.waypoints.Count - 2;
 
         if (current_target == current_waypoints.waypoints[end_index])
         {
@@ -58,6 +61,23 @@ public class CarMovement : MonoBehaviour
             else
             {
                 current_target = current_waypoints.waypoints[waypoint_index];
+                transform.Translate(Vector3.forward * max_speed * Time.deltaTime);
+                Vector3 target_direction = (current_target.transform.position - transform.position).normalized;
+                transform.rotation = Quaternion.LookRotation(target_direction);
+            }
+        }
+        else if(current_target == current_waypoints.waypoints[con_index])
+        {
+            if ((Vector3.Distance(transform.position, crossing.transform.position) < 3.5f))
+            {
+                if(crossing.crossable == false)
+                {
+                    waypoint_index++;
+                    current_target = current_waypoints.waypoints[waypoint_index];
+                }
+            }
+            else
+            {
                 transform.Translate(Vector3.forward * max_speed * Time.deltaTime);
                 Vector3 target_direction = (current_target.transform.position - transform.position).normalized;
                 transform.rotation = Quaternion.LookRotation(target_direction);
@@ -102,5 +122,6 @@ public class CarMovement : MonoBehaviour
     public void ResetValues()
     {
         waiting = true;
+        waypoint_index = 0;
     }
 }

@@ -11,6 +11,7 @@ public class CarSpawner : MonoBehaviour
     private float current_timer = 0.0f;
     public int max_cars;
     public float spawn_delay = 1.0f;
+    public Connection crossing_ref;
 
     private void Start()
     {
@@ -62,6 +63,7 @@ public class CarSpawner : MonoBehaviour
                 CM.current_waypoints = right_side;
                 break;
         }
+        CM.crossing = crossing_ref;
         CM.spawner = this;
         CM.ResetValues();
         new_car.SetActive(true);
