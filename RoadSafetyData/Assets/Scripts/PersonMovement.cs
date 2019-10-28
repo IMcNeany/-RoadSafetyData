@@ -24,6 +24,8 @@ public class PersonMovement : MonoBehaviour
     private bool hit = false;
     private Material mat;
 
+    public bool isRogue = false;
+    
     void Start()
     {
         mat = GetComponentInChildren<MeshRenderer>().material;
@@ -77,6 +79,8 @@ public class PersonMovement : MonoBehaviour
         crossed = false;
         waiting = true;
         hit = false;
+        isRogue = false;
+        GetComponentInChildren<Renderer>().material.SetColor("_Color", Color.white);
     }
 
 
@@ -115,7 +119,7 @@ public class PersonMovement : MonoBehaviour
                         crossed = true; //use this so stop crossing and continue walking on same side
                         return;
                     }
-                    if (current_connection.crossable)
+                    if (current_connection.crossable||isRogue) // if the object's isRogue is true, the object will try to cross the road on the red light
                     {
                         connection_end = current_connection.GetNextConnection(connection_start);
                         current_target = connection_end;

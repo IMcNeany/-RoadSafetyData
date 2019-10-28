@@ -9875,6 +9875,7 @@ GameObject:
   - component: {fileID: 2122610478}
   - component: {fileID: 2122610480}
   - component: {fileID: 2122610479}
+  - component: {fileID: 2122610481}
   m_Layer: 0
   m_Name: PeopleController
   m_TagString: Untagged
@@ -9929,6 +9930,20 @@ MonoBehaviour:
   OP: {fileID: 2122610479}
   max_people: 100
   spawn_delay: 0.25
+--- !u!114 &2122610481
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2122610477}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 373282759763d44489e712e5e0e977ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _op: {fileID: 2122610479}
+  _gm: {fileID: 647830850}
 --- !u!1001 &2136812873
 PrefabInstance:
   m_ObjectHideFlags: 0

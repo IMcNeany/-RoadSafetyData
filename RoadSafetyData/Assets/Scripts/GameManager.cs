@@ -30,13 +30,15 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] private GameObject _chart;
     private Image _fillImage;
+    private ChanceManager _chanceManager;
 
     void Start()
     {
         json_reader = GetComponentInChildren<JSONReader>();
         data_cruncher = GetComponentInChildren<DataCruncher>();
         _fillImage = _chart.transform.GetChild(0).GetComponent<Image>();
-
+        _chanceManager = GetComponentInChildren<ChanceManager>();
+        
         json_reader.LoadJSON();
         data_cruncher.CrunchNumbers();
         UpdatePercentageAccident();
@@ -49,6 +51,7 @@ public class GameManager : MonoBehaviour
 
         percentage_accident = (weatherChance + dayChance + lightingChance + severityChance) / 4;
 
+        _chanceManager.SetIsRogueForRandomPeople();
         UpdateTheChart();
     }
 
